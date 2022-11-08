@@ -1,0 +1,65 @@
+#!/bin/sh
+
+TIME_STAMP="20211102.175434"
+
+# startup script for sway from console
+
+[[ "$1" ]] && {
+    echo "Usage: $( basename $0 ): start a sway session from a console tty"
+    exit 0
+}
+
+LOGFILE=.wsession-errors
+&> $LOGFILE
+exec &> ~/$LOGFILE
+set -x
+echo "sway Starting: $( date )"
+
+
+export EDITOR=/usr/bin/nvim
+
+# FIX for GTK+ applications that take 20 seconds to start 
+# More details: https://github.com/swaywm/sway/issues/5732
+export GTK_USE_PORTAL=0
+
+# export XDG_CURRENT_DESKTOP=Unity
+
+# mozilla apps
+export MOZ_ENABLE_WAYLAND=1
+
+export GDK_BACKEND=wayland
+export CLUTTER_BACKEND=wayland
+export BEMENU_BACKEND=wayland
+export SDL_VIDEODRIVER=wayland
+export WINIT_UNIX_BACKEND=wayland
+# qt variables
+export QT_QPA_PLATFORM=wayland
+# export QT_QPA_PLATFORM=wayland-egl
+# export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_QPA_PLATFORMTHEME=gtk3
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+export SAL_USE_VCLPLUGIN=gtk3
+
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+export ECORE_EVAS_ENGINE=wayland_egl
+
+export ELM_ENGINE=wayland_egl
+
+# so podman compose can pretend to be docker compose:
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/podman/podman.sock"
+
+export FVM_HOME="$HOME/fvm"
+
+# see https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland
+[[ $( hostname ) == arch-arrow ]] && export WLR_NO_HARDWARE_CURSORS=1
+
+export $( gnome-keyring-daemon --start )
+export $( gnome-settings-daemon --start )
+
+# cleanup older sessions:
+rm $HOME/.cache/*.wob
+
+exec sway
