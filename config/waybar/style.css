@@ -1,0 +1,189 @@
+* {
+  /* border: none; */
+  border-radius: 0;
+  font-family: 'mononoki Nerd Font';
+  font-size: 10pt;
+  min-height: 0;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
+
+window#waybar {
+  background: #000;
+  color: white;
+}
+
+tooltip {
+  background: #0f0f0f;
+  border-radius: 8px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #262626;
+}
+
+#workspaces button {
+  color: #f0f0f0;
+  /* padding-left: 10px; */
+  /* padding-right: 10px; */
+  /* min-width: 0; */
+  border-radius: 15px;
+}
+
+#workspaces button.focused {
+  color: #0f0f0f;
+  background-color: #c49ec4;
+  border-radius: 15px;
+}
+
+#workspaces button.urgent {
+  color: #0f0f0f;
+  background-color: #9ec3c4;
+  border-radius: 15px;
+}
+
+#workspaces button:hover {
+  background-color: #c49ec4;
+  color: #0f0f0f;
+  border-radius: 15px;
+}
+
+#custom-date,
+#custom-spotify,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#temperature,
+#language,
+#taskbar,
+#tray,
+#mpd button {
+  padding: 2px 10px;
+}
+
+#custom-date,
+#custom-spotify,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#workspaces,
+#temperature,
+#language,
+#taskbar,
+#tray,
+#mpd {
+  /* background-color: #0f0f0f; */
+  background-color: #262626;
+}
+
+#mpd {
+  background-color: #080808;
+  border-radius: 0px 25px 25px 0px;
+  padding-left: 0px;
+  padding-right: 15px;
+}
+
+#workspaces {
+  background-color: #262626;
+  margin-left: 5px;
+  border-radius: 15px;
+}
+
+#tray,
+#custom-spotify,
+#clock {
+  background-color: #262626;
+}
+
+#custom-date {
+  color: #9ec3c4;
+}
+
+#custom-spotify,
+#clock {
+  color: #a39ec4;
+}
+
+#language {
+  color: #9ec3c4;
+}
+
+#temperature {
+  color: #9ec49f;
+}
+
+#battery {
+  color: #9ec49f;
+}
+
+#battery.charging {
+  color: #9ec49f;
+}
+
+#battery.warning:not(.charging) {
+  background-color: #c49ea0;
+  color: #0f0f0f;
+}
+
+#network {
+  color: #c4c19e;
+}
+
+#pulseaudio {
+  color: #a5b4cb;
+}
+
+.modules-left,
+#clock,
+#language,
+#tray,
+#mpd {
+  /* .modules-left, #clock, #language, #workspaces, #tray, #mpd { */
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  /* border-top-right-radius: 8px; */
+  /* border-bottom-right-radius: 8px; */
+  /* border-top-right-radius: 15px; */
+  /* border-bottom-right-radius: 15px; */
+  /* margin-right: 5px; */
+}
+
+.modules-right,
+#custom-date,
+#pulseaudio,
+#tray,
+#clock,
+#mpd {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  /* border-top-left-radius: 8px; */
+  /* border-bottom-left-radius: 8px; */
+  /* border-top-left-radius: 15px; */
+  /* border-bottom-left-radius: 15px; */
+  /* margin-left: 5px; */
+}
+
+.modules-right {
+  margin-right: 5px;
+}
+
+#custom-spotify,
+#tray {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#custom-date,
+#custom-spotify,
+#tray,
+#clock {
+  border-radius: 15px;
+}
+
+#pulseaudio, #mpd {
+  border-radius: 15px 0px 0px 15px;
+}
+#language {
+  border-radius: 0px 15px 15px 0px;
+}

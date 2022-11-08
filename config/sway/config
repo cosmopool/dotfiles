@@ -1,0 +1,436 @@
+# ========================================================
+#						CONFIG
+# ========================================================
+# set $laptop_screen eDP-1
+# set $f_row_monitor HDMI-A-2
+# set $number_row_monitor HDMI-A-2
+# set $external_monitor_position -277,-1080 transform 0
+# set $second_monitor_pos 1920,0 transform 0
+# set $second_monitor_pos -1920,0 transform 0
+# set $vga_res 1024x768@84.997Hz
+# set $vga_res 1280x1024
+# xwayland disable
+# ========================================================
+#						AUTOSTART
+# ========================================================
+# FIX for GTK+ applications that take 20 seconds to start 
+# More details: https://github.com/swaywm/sway/issues/5732
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# Enables inhibit_idle when playing audio
+exec sway-audio-idle-inhibit
+
+# exec_always /home/arrow/bin/laptop_lid_disable_when_closed_and_hdmi_plugged.sh
+# exec_always wl-gammactl -c 1.068 -b 0.961 -g 0.923
+# exec_always gammastep -O 6300k
+# exec_always xsettingsd
+exec kitty
+exec firefox
+exec telegram-desktop
+exec flatpak run com.spotify.Client
+exec flatpak run com.tutanota.Tutanota
+exec flatpak run com.github.eneshecan.WhatsAppForLinux
+# exec qutebrowser
+# exec spot
+# exec todoist-natifier
+# exec spotify
+# exec todoist-natifier --enable-features=UseOzonePlatform --ozone-platform=wayland
+# exec tutanota-desktop
+# exec whatsapp-for-linux --enable-features=UseOzonePlatform --ozone-platform=wayland
+# exec freetube
+# exec com.github.alainm23.planner
+# exec ferdi
+# exec_always flatpak run com.getferdi.Ferdi
+# ========================================================
+#						CONFIG
+# ========================================================
+# set cliphist to listen for changes on primary keyboard and write it to the history
+exec_always --no-startup-id wl-paste --watch cliphist store
+# ========================================================
+#						STYLE
+# ========================================================
+# default_border none
+default_floating_border normal
+# default_border pixel 1
+gaps outer 0
+gaps inner 3
+font pango:mononoki Nerd Font 14px 
+default_border pixel 2
+# titlebar_border_thickness 5
+# gaps outer 10
+# gaps inner 10
+# --------------------------------------------------------
+#					Window decoration
+# --------------------------------------------------------
+# class                 border  backgr. text    indicator child_border
+# --------------------------------------------------------
+client.focused          #c49ec4 #262626 #f0f0f0 #9ec3c4   #c49ec4
+client.focused_inactive #c49ec4 #262626 #f0f0f0 #9ec3c4   #c49ec4
+client.unfocused        #c49ec4 #0f0f0f #f0f0f0 #9ec3c4   #4c4c4c
+client.urgent           #c49ec4 #c49ec4 #0f0f0f #9ec3c4   #c49ec4
+# --------------------------------------------------------
+#					Import GTK settings
+# --------------------------------------------------------
+set $gnome-schema org.gnome.desktop.interface
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'theme name'
+    gsettings set $gnome-schema icon-theme 'icon theme name'
+    gsettings set $gnome-schema cursor-theme 'cursor theme name'
+    gsettings set $gnome-schema font-name 'Sans 10'
+}
+# ========================================================
+#					WINDOW RULES
+# ========================================================
+#						Assignments
+# --------------------------------------------------------
+assign [app_id="org.qutebrowser.qutebrowser"] 2
+assign [class="Chromium"] 2
+assign [app_id="firefox"] 2
+assign [app_id="org.pwmt.zathura"] 4
+assign [class="Freetube"] 4
+assign [class="tutanota-desktop"] 4
+assign [class="krita"] 6
+assign [class="Gimp-2.10"] 7
+assign [app_id="dev.alextren.Spot"] 8
+assign [class="Spotify"] 8
+assign [instance="spotify"] 8
+assign [app_id="gnome-calculator"] 9
+assign [class="Ferdi"] 9
+assign [app_id="whatsapp-for-linux"] 9
+assign [app_id="telegramdesktop"] 9
+assign [class="todoist-nativefier-409272"] 9
+assign [class="discord"] 9
+assign [app_id="com.github.alainm23.planner"] 9
+# ========================================================
+#						INPUT
+# ========================================================
+# Touchpad settings
+input "1267:12467:ELAN2088:00_04F3:30B3_Touchpad" {
+       dwt enabled
+       tap enabled
+       natural_scroll enabled
+       middle_emulation enabled
+}
+# Keyboard settings
+input "type:keyboard" {
+	  xkb_layout us,br
+		xkb_options grp:win_space_toggle
+}
+# ========================================================
+#						OUTPUT
+# ========================================================
+#					Default wallpaper
+# --------------------------------------------------------
+output * bg /home/arrow/Pictures/Wallpapers/Cthulhu1.jpg fill
+# --------------------------------------------------------
+#						Resulution
+# --------------------------------------------------------
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+# output eDP-1 mode 1366x768 position 0,
+output HDMI-A-2 resolution 1920x1080@59.934Hz
+# output HDMI-A-2 resolution 1920x1080@59.933998Hz
+# --------------------------------------------------------
+#						Lid close
+# --------------------------------------------------------
+# bindswitch --reload --locked lid:on output $laptop_screen disable
+# bindswitch --reload --locked lid:off output $laptop_screen enable
+# --------------------------------------------------------
+#						Behavior
+# --------------------------------------------------------
+# output HDMI-A-2 idle
+focus_follows_mouse yes
+# --------------------------------------------------------
+#					Idle configuration
+# --------------------------------------------------------
+# Locks after 300s, displays off after +300s. Lock screen before sleep
+# swayidle -w \
+#     timeout 600 'loginctl lock-session' \
+#     timeout 1200 'systemctl suspend' \
+#     before-sleep 'loginctl lock-session' \
+#     lock '~/.config/sway/scripts/lock.sh --lock' &
+
+ exec swayidle -w \
+          timeout 300 lock \
+          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          timeout 601 'systemctl suspend' \
+          before-sleep lock
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+# --------------------------------------------------------
+# ========================================================
+#						KEY BINDINGS
+# ========================================================
+## Logo key
+set $mod Mod1
+
+## Dropdown terminal
+# bindsym $mod+n exec i3-quickterm shell
+# bindsym $mod+s exec i3-quickterm
+
+## Home row direction keys
+set $left j
+set $down k
+set $up l
+set $right semicolon
+
+## terminal emulator
+#set $term alacritty
+set $term kitty
+
+## Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu wofi --hide-scroll --style $HOME/.config/wofi/style.css | xargs swaymsg exec --
+# set $menu rofi -show run
+
+# Start a terminal
+bindsym $mod+Return exec $term
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Start your launcher
+bindsym $mod+space exec $menu
+
+# Dismiss notifications
+bindsym Ctrl+space exec makoctl dismiss
+
+# Screenshot with grim and swappy
+# bindsym Ctrl+Shift+f exec grim - | swappy -f -
+bindsym $mod+Shift+p exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    # floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+r reload
+
+
+# Exit sway (logs you out of your Wayland session)
+#bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+mode "$mode_system" {
+		bindsym l exec --no-startup-id lock, mode "default"
+    # bindsym l exec --no-startup-id swaylock --image ~/Pictures/Wallpapers/blade_runner3.jpg --indicator --indicator-radius 100 --indicator-thickness 9 --effect-blur 5x0 --effect-vignette 0.5:0.5 --ring-color 3f4d58 --key-hl-color 829fad --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --fade-in 0.8, mode "default"
+		bindsym e exit
+		bindsym s exec --no-startup-id 'systemctl suspend', mode "default"
+		bindsym r exec --no-startup-id systemctl reboot, mode "default"
+		bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+		# bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+
+# return to default mode
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode "$mode_system"
+
+
+# Exit sway (logs you out of your Wayland session)
+# bindsym $mod+Shift+e exec swaynag -t custom -m 'Do you wish to fully reload your Sway session?' -b 'Yes' 'swaymsg exit'
+# Turn the system off
+# bindsym $mod+Shift+p exec swaynag -t custom -m 'What action would you like to perform?' -b 'Shutdown' 'systemctl poweroff -i' -b 'Restart' 'systemctl reboot'
+# --------------------------------------------------------
+#						Moving around
+# --------------------------------------------------------
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# --------------------------------------------------------
+#						Workspaces
+# --------------------------------------------------------
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+set $ws9 9
+set $ws0 10
+set $wsF1 11
+set $wsF2 12
+set $wsF3 13
+set $wsF4 14
+set $wsF5 15
+set $wsF6 16
+set $wsF7 17
+set $wsF8 18
+set $wsF9 19
+set $wsF10 20
+set $wsF11 21
+set $wsF12 22
+# --------------------------------------------------------
+# Switch to workspace
+# --------------------------------------------------------
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+bindsym $mod+f1 workspace $wsF1
+bindsym $mod+f2 workspace $wsF2
+bindsym $mod+f3 workspace $wsF3
+bindsym $mod+f4 workspace $wsF4
+bindsym $mod+f5 workspace $wsF5
+bindsym $mod+f6 workspace $wsF6
+bindsym $mod+f7 workspace $wsF7
+bindsym $mod+f8 workspace $wsF8
+bindsym $mod+f9 workspace $wsF9
+bindsym $mod+f10 workspace $wsF10
+bindsym $mod+f11 workspace $wsF11
+bindsym $mod+f12 workspace $wsF12
+# --------------------------------------------------------
+# Move focused container to workspace
+# --------------------------------------------------------
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws0
+bindsym $mod+Shift+F1   move container to workspace $wsF1
+bindsym $mod+Shift+F2   move container to workspace $wsF2
+bindsym $mod+Shift+F3   move container to workspace $wsF3
+bindsym $mod+Shift+F4   move container to workspace $wsF4
+bindsym $mod+Shift+F5   move container to workspace $wsF5
+bindsym $mod+Shift+F6   move container to workspace $wsF6
+bindsym $mod+Shift+F7   move container to workspace $wsF7
+bindsym $mod+Shift+F8   move container to workspace $wsF8
+bindsym $mod+Shift+F9   move container to workspace $wsF9
+bindsym $mod+Shift+F10  move container to workspace $wsF10
+bindsym $mod+Shift+F11  move container to workspace $wsF11
+bindsym $mod+Shift+F12  move container to workspace $wsF12
+# --------------------------------------------------------
+# bind workspaces to output
+# --------------------------------------------------------
+workspace $ws1 output $number_row_monitor
+workspace $ws2 output $number_row_monitor
+workspace $ws3 output $number_row_monitor
+workspace $ws4 output $number_row_monitor
+workspace $ws5 output $number_row_monitor
+workspace $ws6 output $number_row_monitor
+workspace $ws7 output $number_row_monitor
+workspace $ws8 output $number_row_monitor
+workspace $ws9 output $number_row_monitor
+workspace $ws0 output $number_row_monitor
+workspace $wsF1 output $f_row_monitor
+workspace $wsF2 output $f_row_monitor
+workspace $wsF3 output $f_row_monitor
+workspace $wsF4 output $f_row_monitor
+workspace $wsF5 output $f_row_monitor
+workspace $wsF6 output $f_row_monitor
+workspace $wsF7 output $f_row_monitor
+workspace $wsF8 output $f_row_monitor
+workspace $wsF9 output $f_row_monitor
+workspace $wsF10 output $f_row_monitor
+workspace $wsF11 output $f_row_monitor
+workspace $wsF12 output $f_row_monitor
+# --------------------------------------------------------
+bindsym $mod+Tab workspace back_and_forth
+# --------------------------------------------------------
+#					Layout stuff
+# --------------------------------------------------------
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+m layout tabbed
+    bindsym $mod+t layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle floating
+    bindsym $mod+Shift+space floating toggle
+    # Toggle between floating and other layout
+    bindsym $mod+Shift+m focus mode_toggle
+    # Move floating windows around
+    bindsym $mod+Up move up 1
+    bindsym $mod+Shift+Up move up 10
+    bindsym $mod+Left move left 1
+    bindsym $mod+Shift+Left move left 10
+    bindsym $mod+Right move right 1
+    bindsym $mod+Shift+Right move right 10
+    bindsym $mod+Down move down 1
+    bindsym $mod+Shift+Down move down 10
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+
+    # Move focus to the child container
+    bindsym $mod+Shift+a focus child
+# --------------------------------------------------------
+#						Scratchpad
+# --------------------------------------------------------
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+# Resizing containers:
+mode "resize" {
+	bindsym $left resize shrink width 10px
+		bindsym $down resize shrink height 10px
+		bindsym $up resize grow height 10px
+		bindsym $right resize grow width 10px
+# Ditto, with arrow keys
+		bindsym Left resize shrink width 10px
+		bindsym Down resize grow height 10px
+		bindsym Up resize shrink height 10px
+		bindsym Right resize grow width 10px
+# Return to default mode
+		bindsym Return mode "default"
+		bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+# --------------------------------------------------------
+#					Special keys
+# --------------------------------------------------------
+# bindsym --locked XF86AudioRaiseVolume exec sh -c "pactl set-sink-mute 45 false ; pactl set-sink-volume 45 +5%"
+# bindsym --locked XF86AudioLowerVolume exec sh -c "pactl set-sink-mute 45 false ; pactl set-sink-volume 45 -5%"
+# bindsym --locked XF86AudioMute exec pactl set-sink-mute 45 toggle
+# bindsym XF86MonBrightnessUp exec blight --device 'intel_backlight' set +5000 && notify-send "󰃞 Light" "Brightness: $(light)%" --hint="int:value:$(light)"
+# bindsym XF86MonBrightnessDown exec blight --device 'intel_backlight' set -5000 && notify-send "󰃞 Light" "Brightness: $(light)%" --hint="int:value:$(light)"
+# bindsym --locked XF86AudioPlay exec mpc toggle
+# bindsym --locked XF86AudioNext exec mpc next
+# bindsym --locked XF86AudioPrev exec mpc prev
+# bindsym --locked $mod+n exec sh -c "notify-send 'Do Not Disturb' 'Turning on Do Not Disturb Mode'; sleep 2; makoctl set-mode do-not-disturb"
+# bindsym --locked $mod+Shift+n exec sh -c "makoctl set-mode default ; notify-send 'Do Not Disturb' 'Do Not Disturb Mode disabled'"
+# --------------------------------------------------------
+#						Status Bar
+# --------------------------------------------------------
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    swaybar_command waybar
+    }
+}

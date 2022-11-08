@@ -1,0 +1,14 @@
+# https://git.sr.ht/~b6d/kmonad-config/tree/bde137fcd656c468e88401f230ab3ab4b91acd1b/item/extra/kmonad.service
+
+[Unit]
+Description=kmonad keyboard config
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+ExecStart=%h/.local/bin/kmonad %h/.config/kmonad/ck61.kbd -l warn
+Nice=-20
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,25 @@
+map [normal] j scroll left
+map [normal] k scroll down
+map [normal] l scroll up
+map [normal] ; scroll right
+map [normal] K navigate next
+map [normal] L navigate previous
+
+map [fullscreen] j scroll left
+map [fullscreen] k scroll down
+map [fullscreen] l scroll up
+map [fullscreen] ; scroll right
+map [fullscreen] K navigate next
+map [fullscreen] L navigate previous
+
+map <C-i> recolor
+
+set font                    "monospace 12"
+set selection-notification	"true"
+set selection-clipboard		"clipboard"
+set guioptions			    "sv"
+set scroll-page-aware		"true"
+set statusbar-home-tilde	"true"
+set recolor			        "true"
+set adjust-open			    "width"
+include moonfly
