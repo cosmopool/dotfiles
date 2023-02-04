@@ -11,19 +11,22 @@ local config = {
 
   -- set vim options here (vim.<first_key>.<second_key> =  value)
   -- If you need more control, you can use the function()...end notation
-  -- options = function(local_vim)
-  --   local_vim.opt.relativenumber = true
-  --   local_vim.g.mapleader = " "
-  --   -- local_vim.cmd = [[hi Normal ctermbg=none guibg=none]]
-  --   -- local_vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' } -- removing option from list
-  --   -- local_vim.opt.shortmess = vim.opt.shortmess + { I = true } -- add to option list
-  --
-  --   return local_vim
-  -- end,
+  options = function(local_vim)
+    local_vim.opt.tabstop = 4
+    local_vim.g.tabstop = 4
+    -- local_vim.opt.relativenumber = true
+    -- local_vim.g.mapleader = " "
+    -- local_vim.cmd = [[hi Normal ctermbg=none guibg=none]]
+    -- local_vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' } -- removing option from list
+    -- local_vim.opt.shortmess = vim.opt.shortmess + { I = true } -- add to option list
+
+    return local_vim
+  end,
 
   otions = {
     opt = {
       relativenumber = true,
+      noexpandtab = true,
     },
     g = {
       mapleader = " ",
@@ -89,9 +92,8 @@ local config = {
       [";"] = { "l" },
 
       -- General
-      ["<C-s>"] = { "<cmd>lua vim.lsp.buf.format()<CR> :w!<CR>", desc = "Format and Save File" },
+      ["<C-s>"] = { "<cmd>lua vim.lsp.buf.formatting_sync()<CR> :w!<CR>", desc = "Format and Save File" },
       ["<leader>nh"] = { ":nohlsearch<CR>" },
-      ["<F10>"] = { "<cmd>ToggleTerm<CR>", desc = "Toggle terminal on/off" },
 
       -- Buffer
       ["<leader>bn"] = { "<cmd>tabnew<CR>", desc = "New tab" },
@@ -149,49 +151,211 @@ local config = {
 
       ["tpope/vim-fugitive"] = {},
 
-      ["ollykel/v-vim"] = {},
+      -- ["thecodinglab/nvim-vlang"] = {},
 
-      ["mfussenegger/nvim-dap"] = {
-        config = function()
-          local present, dap = pcall(require, "dap")
+      -- ["kkharji/vlang.nvim"] = {},
 
-          if not present then
-            return
-          end
+      -- ["smithbm2316/centerpad.nvim"] = {},
 
-          dap.adapters.dart = {
-            type = "executable",
-            command = "node",
-            args = { os.getenv('HOME') .. ".local/share/dart-debugger/debug.js", "flutter test" }
-          }
-          dap.configurations.dart = {
-            {
-              type = "dart",
-              request = "launch",
-              name = "Launch flutter",
-              dartSdkPath = os.getenv('HOME') .. ".local/share/flutter/bin/cache/dart-sdk/",
-              flutterSdkPath = os.getenv('HOME') .. ".local/share/flutter",
-              program = "${file}",
-              cwd = "${workspaceFolder}",
-            }
-          }
-        end
-      },
+      -- ["junegunn/goyo.vim"] = {},
+      --
+      -- ["mfussenegger/nvim-dap"] = {
+      --   config = function()
+      --     local present, dap = pcall(require, "dap")
+      --
+      --     if not present then
+      --       return
+      --     end
+      --
+      --     dap.adapters.dart = {
+      --       type = "executable",
+      --       command = "node",
+      --       args = { os.getenv('HOME') .. ".local/share/dart-debugger/debug.js", "flutter test" }
+      --     }
+      --     dap.configurations.dart = {
+      --       {
+      --         type = "dart",
+      --         request = "launch",
+      --         name = "Launch flutter",
+      --         dartSdkPath = os.getenv('HOME') .. ".local/share/flutter/bin/cache/dart-sdk/",
+      --         flutterSdkPath = os.getenv('HOME') .. ".local/share/flutter",
+      --         program = "${file}",
+      --         cwd = "${workspaceFolder}",
+      --       }
+      --     }
+      --   end
+      -- },
+      -- ["jay-babu/mason-nvim-dap.nvim"] = {
+      --   config = function()
+      --     local present, dap = pcall(require, "dap")
+      --
+      --     if not present then
+      --       return
+      --     end
+      --
+      --     local mason_dap_present, mason_dap = pcall(require, "mason-nvim-dap")
+      --
+      --     if not mason_dap_present then
+      --       return
+      --     end
+      --
+      --     mason_dap.setup_handlers {
+      --       function(source_name)
+      --         -- all sources with no handler get passed here
+      --         -- Keep original functionality of `automatic_setup = true`
+      --         require('mason-nvim-dap.automatic_setup')(source_name)
+      --       end,
+      --       dart = function(source_name)
+      --         dap.configurations.dart.dartSdkPath = os.getenv('HOME') .. "/.local/share/flutter/bin/cache/dart-sdk/"
+      --         dap.configurations.dart.flutterSdkPath = os.getenv('HOME') .. "/.local/share/flutter"
+      --       end,
+      --     }
+      --   end
+      -- },
 
-      ["akinsho/toggleterm.nvim"] = {
-        open_mapping = [[<F10>]],
-        close_on_exit = false,
-        terminal_mappings = true,
-      },
+      -- ["folke/zen-mode.nvim"] = {
+      --   config = function()
+      --     local present, zenmode = pcall(require, "zen-mode")
+      --
+      --     if not present then
+      --       return
+      --     end
+      --     zenmode {
+      --       window = {
+      --         backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+      --         -- height and width can be:
+      --         -- * an absolute number of cells when > 1
+      --         -- * a percentage of the width / height of the editor when <= 1
+      --         -- * a function that returns the width or the height
+      --         width = 120, -- width of the Zen window
+      --         -- height = 1, -- height of the Zen window
+      --         -- by default, no options are changed for the Zen window
+      --         -- uncomment any of the options below, or add other vim.wo options you want to apply
+      --         options = {
+      --           -- signcolumn = "no", -- disable signcolumn
+      --           number = true, -- disable number column
+      --           relativenumber = true, -- disable relative numbers
+      --           -- cursorline = false, -- disable cursorline
+      --           -- cursorcolumn = false, -- disable cursor column
+      --           -- foldcolumn = "0", -- disable fold column
+      --           -- list = false, -- disable whitespace characters
+      --         },
+      --       },
+      --       plugins = {
+      --         -- disable some global vim options (vim.o...)
+      --         -- comment the lines to not apply the options
+      --         options = {
+      --           enabled = true,
+      --           ruler = false, -- disables the ruler text in the cmd line area
+      --           showcmd = false, -- disables the command in the last line of the screen
+      --         },
+      --         twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+      --         gitsigns = { enabled = false }, -- disables git signs
+      --         tmux = { enabled = false }, -- disables the tmux statusline
+      --         -- this will change the font size on kitty when in zen mode
+      --         -- to make this work, you need to set the following kitty options:
+      --         -- - allow_remote_control socket-only
+      --         -- - listen_on unix:/tmp/kitty
+      --         kitty = {
+      --           enabled = false,
+      --           -- font = "+4", -- font size increment
+      --         },
+      --       },
+      --       -- callback where you can add custom code when the Zen window opens
+      --       on_open = function(win)
+      --       end,
+      --       -- callback where you can add custom code when the Zen window closes
+      --       on_close = function()
+      --       end,
+      --     }
+      --   end
+      -- },
+
+      --   ["jose-elias-alvarez/null-ls.nvim"] = {
+      --     config = function()
+      --       local present, null = pcall(require, "null-ls")
+      --
+      --       if not present then
+      --         return
+      --       end
+      --
+      --       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+      --
+      --       null.setup{
+      -- --       sources = {
+      -- --     null.builtins.formatting.stylua,
+      -- --     null.builtins.code_actions.gitsigns,
+      -- --     null.builtins.completion.spell,
+      -- --     null.builtins.code_actions.shellcheck,
+      -- --     null.builtins.formatting.dart_format
+      -- -- },
+      -- on_attach = function(client, bufnr)
+      --     if client.supports_method("textDocument/formatting") then
+      --         vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      --         vim.api.nvim_create_autocmd("BufWritePre", {
+      --             group = augroup,
+      --             buffer = bufnr,
+      --             callback = function()
+      --                 vim.lsp.buf.formatting_sync()
+      --             end,
+      --         })
+      --     end
+      -- end,
+      --       }
+      --     end,
+      --   },
 
       ["glepnir/lspsaga.nvim"] = {
         branch = "main",
-        config = function() require("lspsaga").init_lsp_saga {} end,
+        config = function() require('lspsaga').setup({}) end,
       },
 
       ["akinsho/flutter-tools.nvim"] = {
         requires = "nvim-lua/plenary.nvim",
-        config = function() require("flutter-tools").setup {} end,
+        config = function() require("flutter-tools").setup {
+            debugger = { -- integrate with nvim dap + install dart code debugger
+              enabled = true,
+              run_via_dap = true,
+              -- exception_breakpoints = { "default" },
+              -- register_configurations = function(_)
+              --   require('dap').set_log_level('TRACE')
+              --   require("telescope").load_extensions("flutter")
+              --   require("dap").adapters.dart = {
+              --     type = "executable",
+              --     command = "node",
+              --     args = { os.getenv('HOME') .. ".local/share/dart-debugger/debug.js", "flutter test" }
+              --   }
+              --   require("dap").configurations.dart = {
+              --     {
+              --       type = "dart",
+              --       request = "launch",
+              --       name = "Launch flutter",
+              --       dartSdkPath = os.getenv('HOME') .. ".local/share/flutter/bin/cache/dart-sdk/",
+              --       flutterSdkPath = os.getenv('HOME') .. ".local/share/flutter",
+              --       program = "${file}",
+              --       cwd = "${workspaceFolder}",
+              --     }
+              --   }
+              --   require("dap.ext.vscode").load_launchjs()
+              -- end,
+            },
+            dev_log = { enabled = false, open_cmd = "tabedit" },
+            lsp = {
+              color = {
+                enabled = true,
+                background = true,
+                virtual_text = true,
+                virtual_text_str = "■",
+              },
+              settings = {
+                showTodos = true,
+                renameFilesWithClasses = "prompt",
+              },
+              -- on_attach = require("ryewell.lsp.handlers").on_attach,
+              -- capabilities = require("ryewell.lsp.handlers").capabilities,
+            },
+          }
+        end,
       },
     },
 
