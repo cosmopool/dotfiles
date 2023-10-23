@@ -1,0 +1,3 @@
+return {
+  "ChristianChiarulli/neovim-codicons",
+}

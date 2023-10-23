@@ -1,26 +1,12 @@
--- SETTINGS ---------------------------
-require("options")
-require("keymaps")
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 -- PLUGINS ----------------------------
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=v9.25.1",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-require("plugin_manager")
---local plugins = require("plugins")
---print(plugins)
--- LSP --------------------------------
---require("plugins.lsp")
+require("core.lazy")
+-- SETTINGS ---------------------------
+if vim.loader then vim.loader.enable() end
+require("core.options")
+require("core.keymaps")
 -- THEME ------------------------------
---local theme = require("theme")
--- theme.set("themer", "nord", true)
---theme.set("moonfly")
---vim.cmd [[colorscheme moonfly]]
+vim.cmd.colorscheme("onedark")
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+--vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })

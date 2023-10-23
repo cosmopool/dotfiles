@@ -20,12 +20,12 @@ inoremap("<C-SPACE>", "<C-x><C-o>")
 nnoremap("<C-s>", ":w<CR>")
 
 -- Close buffer
-nnoremap("<C-c>", ":q<CR>")
+nnoremap("<leader>c", ":q<CR>")
 
 -- Toggle term
 -- nnoremap("<C-\\>", ":ToggleTerm<CR>")
 -- nnoremap("<leader>ah", ":ToggleTerm<CR>")
-nnoremap("<leader>a", ":ToggleTerm direction=float<CR>")
+nnoremap("<F7>", ":ToggleTerm direction=float<CR>")
 
 -- Github Copilot autocomplete
 -- vim.g['copilot_no_tab_map'] = false
@@ -113,12 +113,14 @@ nnoremap("<leader>D", "<Cmd>lua vim.diagnostic.setloclist()<CR>")
 nnoremap("<leader><A-d>", "<Cmd>lua vim.diagnostic.setqflist()<CR>")
 
 -- Telescope
-nnoremap("<leader>sf", "<Cmd>Telescope find_files<CR>")
-nnoremap("<leader>sb", "<Cmd>Telescope buffers<CR>")
-nnoremap("<leader>sg", "<Cmd>Telescope live_grep<CR>")
+nnoremap("<leader>fa", "<Cmd>Telescope find_files<CR>")
+nnoremap("<leader>fw", "<Cmd>Telescope live_grep<CR>")
+nnoremap("<leader>ff", "<Cmd>Telescope git_files<CR>")
+nnoremap("<leader>f;", "<Cmd>Telescope buffers<CR>")
+--vim.keymap.set("n", "<leader>fk", function() require("telescope.builtin").grep_string({ search = vim.fn.input("Grep > ")}) end)
 
 -- File explorer
-nnoremap("<leader>t", "<Cmd>NvimTreeToggle<CR>") -- NvimTree
+nnoremap("<leader>e", "<Cmd>Neotree<CR>")
 
 -- actions
 nnoremap("grr", "<cmd>Lspsaga rename<cr>")
@@ -139,7 +141,7 @@ nnoremap("gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 nnoremap("gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 nnoremap("gk", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 nnoremap("gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-nnoremap("<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>")
+nnoremap("gte", "<cmd>lua vim.diagnostic.open_float()<CR>")
 nnoremap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 nnoremap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 nnoremap("<space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>")
