@@ -1,7 +1,7 @@
 set fish_key_bindings fish_user_key_bindings
 
 set -g direnv_fish_mode disable_arrow
-direnv hook fish | source
+#direnv hook fish | source
 
 set -gx EDITOR /usr/bin/nvim
 set -gx CHROME_EXECUTABLE /usr/bin/chromium
@@ -10,6 +10,7 @@ set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
+# set -gx XDG_RUNTIME_DIR /run/user/$(id -u)
 
 set ANDROID_SDK_ROOT "/$HOME/.local/share/android-sdk"
 set A_SDK_TOOLS $ANDROID_SDK_ROOT"/cmdline-tools/latest/bin"
@@ -24,6 +25,5 @@ set -gx PATH $PATH $ANDROID_SDK_ROOT $A_SDK_TOOLS $A_SDK_EMULATOR $A_SDK_PLATFOR
 
 alias mpv-yt "mpv --ytdl-format=bestvideo[vcodec=vp9]+bestaudio/best"
 alias yt "mpv --hwdec=auto"
-alias ferdi "flatpak run com.getferdi.Ferdi"
 
 starship init fish | source
