@@ -1,0 +1,50 @@
+# vim:set ft=gitconfig noet sts=4 sw=4 ts=4 tw=84:
+[user]
+	name = Kaio Delphino
+	email = dash.zet@gmail.com
+[github]
+	user = cosmopool
+[pull]
+	rebase = true
+; [merge]
+; 	branchdesc = true
+; 	conflictstyle = diff3
+[merge "log"]
+	name = true
+[core]
+	excludesfile = ~/.config/git/ignore
+	editor = nvim
+; [alias]
+; 	oldest-ancestor = !zsh -c 'diff -u <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | sed -ne \"s/^ //p\" | head -1' -
+; 	graph = log --graph --oneline --decorate=short
+; 	unstage = reset HEAD --
+; 	undo = checkout --
+; 	append = commit --amend --no-edit
+; 	todo = !sh -c 'grep --color=always -rn "TODO" `git ls-files`'
+; 	search = !sh -c 'grep --color=always -rn \"$1\" `git ls-files`' -
+; 	page = !zsh -c '~/.dotfiles/git/scripts/gitpage.sh'
+; 	blame-list = !sh -c '~/.dotfiles/git/scripts/gitblameall.sh \"$0\" $1'
+; 	branch-search = !sh -c 'git branch --list | fzf -m'
+; 	commit-search = !git log --oneline | fzf | awk '{ print $1 }'
+; 	ri = rebase -i --autosquash
+; 	fix = commit --fixup
+; 	merge-graph = !zsh -c `git log --oneline --graph $1^..$1 --`
+; 	pr-fetch-stash = !sh -c 'git fetch $0 refs/pull-requests/$1/from:$2'
+; 	pr-fetch-github = !sh -c 'git fetch $0 pull/$1/head:$2'
+; 	deactivate = !sh -c 'git remote set-url --push $0 INVALID'
+; 	activate = !sh -c 'git remote set-url --push $0 $(git remote get-url $0)'
+[color]
+	log = always
+	status = always
+	graph = always
+[log]
+	mailmap = true
+; [init]
+; 	defaultBranch = main
+[submodule]
+	recurse = true
+	fetchJobs = 0
+[fetch]
+	parallel = 0
+; [include]
+; 	path = "private"
