@@ -1,9 +1,33 @@
 nvim/
 qBittorrent/
-htop/
 glab-cli/
 .dart-cli-completion/
 flutter/
 configstore/
 functions/
 tool_state
+.android/
+.gsd-keyboard.settings-ported
+Android Open Source Project/
+background
+dconf/
+evolution/
+fvm/
+gnome-initial-setup-done
+gnote/
+go/
+gtk-3.0/bookmarks
+htop/
+ibus/
+mimeapps.list
+monitors.xml
+monitors.xml~
+pipewire/
+portals.conf
+pulse/
+qutebrowser/quickmarks
+service/
+tool_state
+totem/
+yelp/
+>>>>>>> 1fa1b1c (chore: ignore unnecessary folders)
