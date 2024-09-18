@@ -1,1 +1,9 @@
 nvim/
+qBittorrent/
+htop/
+glab-cli/
+.dart-cli-completion/
+flutter/
+configstore/
+functions/
+tool_state
