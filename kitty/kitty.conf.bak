@@ -21,7 +21,7 @@ map ctrl+l					        scroll_line_up
 map ctrl+k					        scroll_line_down
 map alt+shift+[             previous_tab
 map alt+shift+]             next_tab
-map ctrl+t                  new_tab
+map alt+t                   new_tab
 map alt+shift+i             set_tab_title
 ##################################################
 # Font Configuration
@@ -43,6 +43,6 @@ background_blur             80
 
 
 # BEGIN_KITTY_THEME
-# Hybrid
+# Neutron
 include current-theme.conf
 # END_KITTY_THEME
