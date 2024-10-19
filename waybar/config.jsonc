@@ -1,9 +1,8 @@
 {
   "position": "top",
   "height": 15,
-  "output": "HDMI-A-2",
   "modules-left": [
-    "sway/workspaces",
+    "hyprland/workspaces",
     "custom/spotify"
   ],
   "modules-center": [
@@ -14,9 +13,9 @@
     "pulseaudio",
     "temperature",
     "network",
-    "sway/language"
+    "hyprland/language"
   ],
-  "sway/workspaces": {
+  "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "format": "{icon}",
@@ -84,7 +83,7 @@
     "icon-size": 20,
     "spacing": 5
   },
-  "sway/language": {
+  "hyprland/language": {
     "format": " {long}"
   },
   "temperature": {
