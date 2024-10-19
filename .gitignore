@@ -1,3 +1,11 @@
+QtProject.conf
+Xplist/
+atuin/
+droidcam
+glib-2.0/
+hypr/initial-boot.sh
+ic005k/
+obs-studio/
 nvim/
 qBittorrent/
 glab-cli/
