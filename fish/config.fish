@@ -2,6 +2,7 @@ set fish_key_bindings fish_user_key_bindings
 
 set -g direnv_fish_mode disable_arrow
 #direnv hook fish | source
+atuin init fish | source
 
 set -gx EDITOR /usr/bin/nvim
 set -gx CHROME_EXECUTABLE /usr/bin/chromium
