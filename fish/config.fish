@@ -1,5 +1,7 @@
 set fish_key_bindings fish_user_key_bindings
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 set -g direnv_fish_mode disable_arrow
 
 set -gx EDITOR /usr/bin/nvim
