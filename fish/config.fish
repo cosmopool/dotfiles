@@ -1,8 +1,6 @@
 set fish_key_bindings fish_user_key_bindings
 
 set -g direnv_fish_mode disable_arrow
-#direnv hook fish | source
-atuin init fish | source
 
 set -gx EDITOR /usr/bin/nvim
 set -gx CHROME_EXECUTABLE /usr/bin/chromium
@@ -27,4 +25,6 @@ set -gx PATH $PATH $ANDROID_SDK_ROOT $A_SDK_TOOLS $A_SDK_EMULATOR $A_SDK_PLATFOR
 alias mpv-yt "mpv --ytdl-format=bestvideo[vcodec=vp9]+bestaudio/best"
 alias yt "mpv --hwdec=auto"
 
+#direnv hook fish | source
 starship init fish | source
+atuin init fish | source
