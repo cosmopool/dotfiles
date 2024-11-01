@@ -22,7 +22,6 @@
           pkgs.fzf
           pkgs.spotify
           pkgs.kitty
-          pkgs.alacritty
           pkgs.vesktop
           pkgs.starship
           pkgs.mas
