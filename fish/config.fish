@@ -4,7 +4,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 set -g direnv_fish_mode disable_arrow
 
-set -gx EDITOR /usr/bin/nvim
+set -gx EDITOR $(which nvim)
 set -gx CHROME_EXECUTABLE /usr/bin/chromium
 set -gx GOPATH $HOME/go
 set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
