@@ -1,6 +1,7 @@
 set fish_key_bindings fish_user_key_bindings
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+set BREW_BIN $(which brew)
+eval "$($BREW_BIN shellenv)"
 
 set -g direnv_fish_mode disable_arrow
 
