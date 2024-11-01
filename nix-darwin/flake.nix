@@ -30,6 +30,8 @@
           pkgs.fish
           pkgs.atuin
           pkgs.cocoapods
+          pkgs.tree-sitter # needed to finish swift configuration in neovim. can be commented out after everything is finished
+          pkgs.go
         ];
 
       fonts.packages = with pkgs; [
@@ -53,6 +55,7 @@
         ];
         brews = [
           "fvm"
+          # "nodejs" # needed for installing lots of languages servers in neovim. comment again after everything is installed.
         ];
         taps = [
           "leoafarias/fvm"
