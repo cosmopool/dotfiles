@@ -173,7 +173,7 @@ run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.dt.Xcode'
-run = 'move-node-to-workspace 5'
+run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
 if.app-id = 'org.qbittorrent.qBittorrent'
@@ -189,6 +189,10 @@ run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-id = 'dev.vencord.vesktop'
+run = 'move-node-to-workspace 9'
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 9'
 
 [[on-window-detected]]
