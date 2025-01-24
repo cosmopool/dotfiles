@@ -15,8 +15,9 @@
 
       environment.systemPackages =
         [
-          pkgs.neovim
           pkgs.mkalias
+          pkgs.fish
+          pkgs.neovim
           pkgs.ripgrep
           pkgs.git
           pkgs.fzf
@@ -27,35 +28,41 @@
           pkgs.mas
           pkgs.qbittorrent
           pkgs.zig
-          pkgs.fish
           pkgs.atuin
           pkgs.cocoapods
           pkgs.tree-sitter # needed to finish swift configuration in neovim. can be commented out after everything is finished
           pkgs.go
+          pkgs.scrcpy
+          pkgs.wget
+          pkgs.cmake
+          pkgs.jq
+          pkgs.jdk
+          pkgs.gitlab-runner
+          pkgs.cocoapods
+          pkgs.curl
+          pkgs.lcov
+          pkgs.fastlane
+          pkgs.aerospace
+          # pkgs.nodejs
         ];
 
       fonts.packages = with pkgs; [
         office-code-pro
-        (pkgs.nerdfonts.override {
-          fonts = [
-            "Hack"
-            "Meslo"
-          ];
-        })
+	pkgs.nerd-fonts.hack
       ];
 
       homebrew = {
         enable = true;
         casks = [
           "karabiner-elements"
-          "thunderbird"
           "firefox"
-          "nikitabobko/tap/aerospace"
-          "stremio"
+          "thunderbird"
+          # "nikitabobko/tap/aerospace"
         ];
         brews = [
           "fvm"
-          # "nodejs" # needed for installing lots of languages servers in neovim. comment again after everything is installed.
+          "rust"
+          "nodejs" # needed for installing lots of languages servers in neovim. comment again after everything is installed.
         ];
         taps = [
           "leoafarias/fvm"
@@ -131,15 +138,6 @@
 	      remapCapsLockToEscape = true;
       };
 
-      # services.defaults = {
-      #   enable = true;
-      #   "com.apple.dock.mru-spaces" = {
-      #     type = "bool";
-      #     value = false;
-      #   };
-      # };
-      # services.dock.restart = true;
-
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
 
@@ -156,15 +154,6 @@
         };
       };
       environment.shells = [pkgs.fish];
-      # programs.bash = {
-      #   interactiveShellInit = ''
-      #     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      #     then
-      #       shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-      #       exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      #     fi
-      #   '';
-      # };
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -173,12 +162,12 @@
       system.stateVersion = 5;
 
       # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "x86_64-darwin";
+      nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in
   {
     # Build darwin flake using:
-    darwinConfigurations."macos" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations."Sony-TV" = nix-darwin.lib.darwinSystem {
       modules = [ 
         configuration
         nix-homebrew.darwinModules.nix-homebrew {
@@ -191,6 +180,6 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."macos".pkgs;
+    darwinPackages = self.darwinConfigurations."Sony-TV".pkgs;
   };
 }
