@@ -57,6 +57,7 @@
           "karabiner-elements"
           "firefox"
           "thunderbird"
+          "ghostty"
           # "nikitabobko/tap/aerospace"
         ];
         brews = [
