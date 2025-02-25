@@ -64,6 +64,7 @@
           "fvm"
           "rust"
           "nodejs" # needed for installing lots of languages servers in neovim. comment again after everything is installed.
+          "firebase-cli"
         ];
         taps = [
           "leoafarias/fvm"
