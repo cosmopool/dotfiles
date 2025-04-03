@@ -29,46 +29,35 @@
 (defalias
   ;; Make control and esc a single key
   csc (tap-hold-next-release 400 esc lctl)
-  ;; scs (tap-hold-next-release 200 lmet fn1)
 
   ;; Reset the default layout
   rst (layer-switch m0)
 
   ;; Toggle layer on hold, switch layer on tap
-  ;; sw (layer-switch m1)
-  ;; fn1 (tap-hold-next-release 200 (layer-toggle m1) lmet)
-  ;; fn2 (tap-hold-next-release 200 (layer-toggle m1) rmet)
-  ;; fn1 (tap-hold-next-release 220 lmet (layer-toggle m1))
   ecc (tap-hold-next-release 500 esc caps)
-  ;; fn1 (tap-hold-next-release 220 (layer-switch m1) lmet)
   fn1 (tap-hold-next-release 220 lmet (layer-toggle m1))
-  ;; fn1 (tap-hold-next-release 220 (layer-switch m1) (layer-toggle m1))
-  ;; fn2 (tap-hold-next-release 220 (layer-switch m1) (layer-toggle m1))
-  ;; fn1 (layer-toggle m1)
-  
-  ;; Home row mods
-  ;; ms (tap-hold-next-release 1000 a lalt)
-  ;; md (tap-hold-next-release 1000 s lctl)
-  ;; mf (tap-hold-next-release 1000 d lsft)
-  ;; mg (tap-hold-next-release 1000 f lmet)
-
-  ;; mh (tap-hold-next-release 1000 j lmet)
-  ;; mj (tap-hold-next-release 1000 k lsft)
-  ;; mk (tap-hold-next-release 1000 l lctl)
-  ;; ml (tap-hold-next-release 1000 ; lalt)
+  fn2 (layer-toggle m2)
 )
 
 ;; default layer
 (deflayer m0
   grv  _    _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  @ecc _    _    _    _    _    _    _    _    _    _    _    _
+  esc  _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _
-  _    @fn1 _              _                   rmet @fn1 _
+  _    @fn1 _              _                   rmet @fn1 @fn2
 )
 
 (deflayer m1
   _    f1   f2   f3  f4    f5   f6   f7   f8   f9   f10  f11  f12  del
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  @rst _    _    _    _    _    _    lft  down up   rght _    _
+  _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _              _                   _    _    _
+)
+
+(deflayer m2
+  esc  f1   f2   f3  f4    f5   f6   f7   f8   f9   f10  f11  f12  del
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   @rst _    _    _    _    _    _    lft  down up   rght _    _
   _    _    _    _    _    _    _    _    _    _    _    _
