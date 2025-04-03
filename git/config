@@ -6,6 +6,8 @@
 	user = cosmopool
 [pull]
 	rebase = true
+[push]
+	autoSetupRemote = true
 ; [merge]
 ; 	branchdesc = true
 ; 	conflictstyle = diff3
