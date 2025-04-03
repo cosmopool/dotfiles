@@ -38,3 +38,15 @@ service/
 tool_state
 totem/
 yelp/
+Defold/
+GIMP/
+blender/
+electron-builder.json
+eog/
+evince/
+flow/
+github-copilot/
+godot/
+thorium/
+torbrowser/
+vesktop/
