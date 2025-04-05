@@ -27,7 +27,6 @@
           pkgs.starship
           pkgs.mas
           pkgs.qbittorrent
-          pkgs.zig
           pkgs.atuin
           pkgs.cocoapods
           pkgs.tree-sitter # needed to finish swift configuration in neovim. can be commented out after everything is finished
