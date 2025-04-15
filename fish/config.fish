@@ -1,11 +1,27 @@
 set fish_key_bindings fish_user_key_bindings
 
-# eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# setup brew for linux and macos
+if test -d /home/linuxbrew/.linuxbrew
+      # Homebrew is installed on Linux
+
+      set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
+      set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar"
+      set -gx HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
+      set -gx PATH "/home/linuxbrew/.linuxbrew/bin" "/home/linuxbrew/.linuxbrew/sbin" $PATH
+      set -q MANPATH; or set MANPATH ''
+      set -gx MANPATH "/home/linuxbrew/.linuxbrew/share/man" $MANPATH
+      set -q INFOPATH; or set INFOPATH ''
+      set -gx INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH
+
+      # Homebrew asked for this in order to `brew upgrade`
+      set -gx HOMEBREW_GITHUB_API_TOKEN {api token goes here, don't remember where that's created}
+  else if test -d /opt/homebrew
+      # Homebrew is installed on MacOS
+      /opt/homebrew/bin/brew shellenv | source
+  end
 
 set -g direnv_fish_mode disable_arrow
 set -gx EDITOR $(which nvim)
-set -gx SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx XDG_CACHE_HOME "$HOME/.cache"
@@ -22,10 +38,10 @@ set -gx PATH $PATH $A_SDK_TOOLS $A_SDK_EMULATOR $A_SDK_PLATFORM_T
 
 # FVM
 set -e FVM_HOME
-set FLUTTER_FVM_PATH "$HOME/fvm/default/bin"
+set FLUTTER_FVM_PATH "$HOME/.fvm/default/bin"
 set -gx JAVA_OPTS "-XX:+IgnoreUnrecognizedVMOptions"
 set -gx FVM_CACHE_PATH $HOME/.fvm
-set -gx PATH $PATH $HYPRLAND_SCRIPTS
+set -gx PATH $PATH $FLUTTER_FVM_PATH
 
 # FLUTTER
 set -gx CHROME_EXECUTABLE /usr/bin/chromium
