@@ -1,0 +1,10 @@
+[manager]
+prepend_keymap = [
+  # Hopping
+	{ on = "l", run = "arrow prev", desc = "Previous file" },
+	{ on = "k", run = "arrow next", desc = "Next file" },
+
+  # Navigation
+	{ on = "j", run = "leave", desc = "Back to the parent directory" },
+	{ on = ";", run = "enter", desc = "Enter the child directory" },
+]

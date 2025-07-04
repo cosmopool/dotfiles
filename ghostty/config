@@ -1,6 +1,6 @@
-# font-family = Hack Nerd Font
-# font-family = FiraCode Nerd Font
-font-size = 11
+font-family = ""
+font-family = Hack
+font-size = 13
 font-thicken = true
 
 # disable most ligatures
@@ -9,7 +9,7 @@ font-feature = -liga
 font-feature = -dlig
 
 adjust-cell-width =
-adjust-cell-height = -1
+adjust-cell-height =
 adjust-font-baseline =
 
 cursor-style = block
