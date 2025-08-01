@@ -42,12 +42,14 @@
           pkgs.lcov
           pkgs.fastlane
           pkgs.aerospace
+          pkgs.ruby
           # pkgs.nodejs
         ];
 
       fonts.packages = with pkgs; [
         office-code-pro
-	pkgs.nerd-fonts.hack
+	      pkgs.nerd-fonts.hack
+	      pkgs.nerd-fonts.agave
       ];
 
       homebrew = {
@@ -73,7 +75,7 @@
           "Whatsapp" = 310633997;
           "Telegram" = 747648890;
         };
-        onActivation.cleanup = "zap";
+        # onActivation.cleanup = "zap";
       };
 
       system.activationScripts.setFishAsShell.text = ''
@@ -140,14 +142,15 @@
       };
 
       # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
+      nix.enable = true;
 
       # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
+      nix.settings.experimental-features = ["nix-command" "flakes"];
 
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh.enable = true;
       programs.fish.enable = true;
+      system.primaryUser = "arrow";
       users.users = {
         arrow = {
           home = "/Users/arrow";
