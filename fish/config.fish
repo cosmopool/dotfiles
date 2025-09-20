@@ -1,24 +1,37 @@
 set fish_key_bindings fish_user_key_bindings
 
-# setup brew for linux and macos
-if test -d /home/linuxbrew/.linuxbrew
-      # Homebrew is installed on Linux
+set -l OS (uname)
 
-      set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
-      set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar"
-      set -gx HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
-      set -gx PATH "/home/linuxbrew/.linuxbrew/bin" "/home/linuxbrew/.linuxbrew/sbin" $PATH
-      set -q MANPATH; or set MANPATH ''
-      set -gx MANPATH "/home/linuxbrew/.linuxbrew/share/man" $MANPATH
-      set -q INFOPATH; or set INFOPATH ''
-      set -gx INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH
-
-      # Homebrew asked for this in order to `brew upgrade`
-      set -gx HOMEBREW_GITHUB_API_TOKEN {api token goes here, don't remember where that's created}
-  else if test -d /opt/homebrew
-      # Homebrew is installed on MacOS
+# running on macos
+if test "$OS" = Darwin
+  # HOMEBREW
+  if test -d /opt/homebrew
       /opt/homebrew/bin/brew shellenv | source
   end
+end
+
+# running on linux
+if test "$OS" = Linux
+  # KEYRING
+  set -gx SSH_AUTH_SOCK /run/user/1000/keyring/ssh
+
+  # HOMEBREW
+  if test -d /home/linuxbrew/.linuxbrew
+        # Homebrew is installed on Linux
+        set -gx HOMEBREW_PREFIX "/home/linuxbrew/.linuxbrew"
+        set -gx HOMEBREW_CELLAR "/home/linuxbrew/.linuxbrew/Cellar"
+        set -gx HOMEBREW_REPOSITORY "/home/linuxbrew/.linuxbrew/Homebrew"
+        set -gx PATH "/home/linuxbrew/.linuxbrew/bin" "/home/linuxbrew/.linuxbrew/sbin" $PATH
+        set -q MANPATH; or set MANPATH ''
+        set -gx MANPATH "/home/linuxbrew/.linuxbrew/share/man" $MANPATH
+        set -q INFOPATH; or set INFOPATH ''
+        set -gx INFOPATH "/home/linuxbrew/.linuxbrew/share/info" $INFOPATH
+  
+        # Homebrew asked for this in order to `brew upgrade`
+        set -gx HOMEBREW_GITHUB_API_TOKEN {api token goes here, don't remember where that's created}
+  end
+end
+
 
 set -g direnv_fish_mode disable_arrow
 set -gx EDITOR $(which nvim)
@@ -60,7 +73,11 @@ set -gx PATH $PATH "$ZVM_INSTALL/"
 set -gx GOPATH $HOME/go
 set -gx PATH $PATH "$GOPATH/bin"
 
-set -gx PATH $PATH "$HOME/.local/bin" "$HOME/.local/share/flatpak/exports/share"
+# FLATPAK
+set -gx PATH $PATH "$HOME/.local/share/flatpak/exports/share"
+
+# LOCAL BIN
+set -gx PATH $PATH "$HOME/.local/bin"
 
 
 alias mpv-yt "mpv --ytdl-format=bestvideo[vcodec=vp9]+bestaudio/best"
