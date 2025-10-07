@@ -46,7 +46,7 @@ set -gx ANDROID_SDK_ROOT "$HOME/.local/share/android-sdk"
 set A_SDK_TOOLS $ANDROID_SDK_ROOT"/cmdline-tools/latest/bin"
 set A_SDK_PLATFORM_T $ANDROID_SDK_ROOT"/platform-tools"
 set A_SDK_EMULATOR $ANDROID_SDK_ROOT"/emulator"
-set -gx ANDROID_AVD_HOME "$HOME/.config/.android/avd"
+set -gx ANDROID_AVD_HOME "$HOME/.android/avd"
 set -gx PATH $PATH $A_SDK_TOOLS $A_SDK_EMULATOR $A_SDK_PLATFORM_T
 
 # FVM
