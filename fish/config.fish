@@ -51,9 +51,14 @@ set -gx PATH $PATH $A_SDK_TOOLS $A_SDK_EMULATOR $A_SDK_PLATFORM_T
 
 # FVM
 set -e FVM_HOME
-set FLUTTER_FVM_PATH "$HOME/.fvm/default/bin"
+if [ $(uname -s) = "Linux" ]
+  set -gx FLUTTER_FVM_PATH "$HOME/.fvm/default/bin"
+  set -gx FVM_CACHE_PATH $HOME/.fvm
+else
+  set -gx FLUTTER_FVM_PATH "$HOME/fvm/default/bin"
+  set -gx FVM_CACHE_PATH $HOME/fvm
+end
 set -gx JAVA_OPTS "-XX:+IgnoreUnrecognizedVMOptions"
-set -gx FVM_CACHE_PATH $HOME/.fvm
 set -gx PATH $PATH $FLUTTER_FVM_PATH
 
 # FLUTTER
