@@ -87,7 +87,7 @@
         env = pkgs.buildEnv {
           name = "system-applications";
           paths = config.environment.systemPackages;
-          pathsToLink = "/Applications";
+          pathsToLink = [ "/Applications" ];
         };
       in
         # set shortcuts for GUI apps installed via nix (homebrew casks don't need it)
