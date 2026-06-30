@@ -15,6 +15,7 @@
 
       environment.systemPackages =
         [
+          pkgs.cmake
           pkgs.mkalias
           pkgs.fish
           pkgs.neovim
@@ -41,7 +42,7 @@
           pkgs.curl
           pkgs.lcov
           pkgs.fastlane
-          pkgs.aerospace
+          # pkgs.aerospace
           pkgs.ruby
           # pkgs.nodejs
         ];
@@ -59,7 +60,7 @@
           "firefox"
           "thunderbird"
           "ghostty"
-          # "nikitabobko/tap/aerospace"
+          "nikitabobko/tap/aerospace"
         ];
         brews = [
           "fvm"
